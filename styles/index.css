@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100svw;
+    height: 100svh;
+}
+
+header {
+    height: 7svh;
+    width: 100%;
+    border: 1px solid greenyellow;
+    padding: 0.2rem;
+}
+
+header > nav {
+    display: flex;
+    flex-direction: row;
+}
+
+img {
+    width: 50px;
+    aspect-ratio: 1;
+}
+
+main {
+    height: 93svh;
+    width: 100%;
+    border: 1px solid red;
+    padding: 0.2rem;
+}
