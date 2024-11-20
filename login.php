@@ -5,10 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Este es un documento HTML5">
     <meta name="keywords" content="HTML, CSS, JavaScript">
-    <link rel="stylesheet" href="./styles/index.css">
-    <title>Buzón de Quejas</title>
+    <link rel="stylesheet" href="./styles/login.css">
+    <title>Iniciar Sesión</title>
 </head>
 <body>
+<?php
+global $mysqli;
+// Aquí va el código PHP
+// Se incluye el archivo de conexión a la base de datos
+include_once "conexion.php";
+
+session_start();
+
+$error = "";
+
+// Verificar si se ha enviado el formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombreUsuario = isset($_POST['username']) ? $_POST['username'] : ""; // Cambiado aquí
+    $correo = isset($_POST['correo']) ? $_POST['correo'] : "";
+    $password = isset($_POST['password']) ? $_POST['password'] : "";
+
+    // Comprobar la conexión
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    } else {
+        // Consulta para verificar si el usuario existe y las credenciales son válidas
+        $sqlQuery = "SELECT * FROM CuentasUsuarios WHERE Nom_Usuario = '$nombreUsuario' AND Correo = '$correo' AND Contraseña = '$password'";
+        $result = $mysqli->query($sqlQuery);
+
+        if ($result && $result->num_rows > 0) {
+            $_SESSION['nombreUsuario'] = $nombreUsuario; // Iniciar sesión solo si las credenciales son válidas
+            header("Location: buzon.php");
+            exit; // Asegúrate de llamar a exit después de una redirección
+        } else {
+            $error = "Usuario o contraseña incorrectos";
+        }
+    }
+}
+?>
+
 <header>
     <nav>
         <img src="./assets/LogoITCJ.png" alt="Logo ITCJ">
@@ -38,14 +73,32 @@
         </aside>
         <section>
             <h1>Instituto Tecnológico Cd Juárez</h1>
-            <div class="buttons">
-                <!-- Botón de inicio de sesión -->
-                <button onclick="window.location.href='/login.php'">Iniciar Sesión</button>
-                <!-- Botón de registro -->
-                <button onclick="window.location.href='/registro.php'">Registrarse</button>
-            </div>
-
-            <img src="assets/LogoITCJ_2.png" alt="Mascota ITCJ">
+            <form action="login.php" method="post">
+                <div class="login">
+                    <label for="username">Nombre de usuario:</label>
+                    <input type="text" id="username" name="username" required placeholder="Nombre de usuario">
+                </div>
+                <div class="login">
+                    <label for="correo">Correo electrónico:</label>
+                    <input type="email" id="correo" name="correo" required placeholder="Correo electrónico">
+                </div>
+                <div class="login">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required placeholder="Contraseña">
+                </div>
+                <div class="signUp">
+                    <p>
+                        ¿No tienes una cuenta? ¡Regístrate!
+                    </p>
+                    <button onclick="window.location.href='/registro.php'">Crear cuenta</button>
+                </div>
+                <button type="submit">Iniciar Sesión</button>
+                <?php
+                if (isset($error)) {
+                    echo "<p>$error</p>";
+                }
+                ?>
+            </form>
         </section>
     </section>
     <footer>

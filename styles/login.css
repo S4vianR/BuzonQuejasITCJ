@@ -93,7 +93,6 @@ main > section:nth-child(1) > section {
     margin: auto;
     width: fit-content;
     height: fit-content;
-    background-color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,29 +105,84 @@ main > section:nth-child(1) > section {
 }
 
 main > section:nth-child(1) > section > h1 {
-    font-size: 1.875rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
-main > section:nth-child(1) > section > .buttons {
+main > section:nth-child(1) > section > form {
+    width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
 }
 
-main > section:nth-child(1) > section > .buttons button {
-    background-color: #6495ED;
+main > section:nth-child(1) > section > form button[type="submit"] {
+    background-color: #0F52BA;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+main > section:nth-child(1) > section > form button[type="submit"]:hover {
+    transform: scale(1.09);
+}
+
+main > section:nth-child(1) > section > form div.login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+main > section:nth-child(1) > section > form div.login label {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+main > section:nth-child(1) > section > form div.login input {
+    font-size: 1rem;
+    font-weight: 300;
+    width: 100%;
+    padding: 0.3rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+}
+
+main > section:nth-child(1) > section > form div.signUp {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+main > section:nth-child(1) > section > form div.signUp p {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+main > section:nth-child(1) > section > form div.signUp button {
+    background-color: #fff;
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem;
-    color: #fff;
+    color: #0F52BA;
+    cursor: pointer;
+    box-shadow: -5px 2px 10px 1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
 }
 
-main > section:nth-child(1) > section > .buttons button:hover {
-    cursor: pointer;
+main > section:nth-child(1) > section > form div.signUp button:hover {
+    transform: scale(1.09);
     background-color: #0F52BA;
+    color: #fff;
 }
 
 main > section:nth-child(1) > section > img {
